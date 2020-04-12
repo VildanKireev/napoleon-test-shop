@@ -15,11 +15,31 @@ class ExampleUnitTest {
     fun example() {
 
         val iphoneCase = Product(price = 123.5, salePercent = 30)
+        val samsungCase = Product(price = 124.5, salePercent = 15)
 
-        val pricePrinter: PricePrinter = PricePrinterImplementation()
+        val pricePrinter: PricePrinter = ConsolePricePrinter()
 
-        val discountIphoneCasePrice = iphoneCase.calcDiscountPrice()
-        pricePrinter.print(discountIphoneCasePrice)
+        val products = listOf(iphoneCase, samsungCase)
+        val discountPrices = products.map { it.calcDiscountPrice() }
+
+        discountPrices.forEach { discountPrice ->
+            pricePrinter.print(discountPrice)
+        }
+
+        products.myForEach { product ->
+            val discountPrice = product.calcDiscountPrice()
+            pricePrinter.print(discountPrice)
+        }
+
+        discountPrices.myForEach { discountPrice ->
+            pricePrinter.print(discountPrice)
+        }
+    }
+
+    private fun <TItem> List<TItem>.myForEach(action: (TItem) -> Unit) {
+        for (item in this) {
+            action(item)
+        }
     }
 }
 
@@ -51,7 +71,7 @@ interface PricePrinter {
     fun print(price: Double)
 }
 
-class PricePrinterImplementation : PricePrinter {
+class ConsolePricePrinter : PricePrinter {
 
     override fun print(price: Double) {
         val priceRounded = round(price * 100) / 100

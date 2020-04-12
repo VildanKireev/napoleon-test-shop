@@ -1,0 +1,2 @@
+rootProject.name='napoleon-test-shop'
+include ':app'

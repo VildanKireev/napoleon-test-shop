@@ -1,6 +1,8 @@
 package com.kireev.shop
 
 import org.junit.Test
+import kotlin.math.round
+import kotlin.math.roundToInt
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -12,36 +14,31 @@ class ExampleUnitTest {
     @Test
     fun example() {
 
-        class Product(
-
-            /**
-             * Must be positive
-             */
-            private val price: Double,
-            private val salePercent: Int
-        ) {
-
-            /**
-             * @return price with applied discount determined by [salePercent]
-             *
-             * If [salePercent] is more than 100 then product will have negative price
-             * If [salePercent] is less than 0 then product price will be increased
-             */
-            fun calcDiscountPrice(): Double = price * (1 - salePercent / 100.0)
-        }
-
         val iphoneCase = Product(price = 123.5, salePercent = 30)
-        val samsungCase = Product(price = 300.5, salePercent = 99)
 
-        val pricePrinter: PricePrinter = CleanKotlinPricePrinter()
+        val pricePrinter: PricePrinter = PricePrinterImplementation()
 
         val discountIphoneCasePrice = iphoneCase.calcDiscountPrice()
-        val formattedIphoneCasePrice = pricePrinter.print(discountIphoneCasePrice)
-        println(formattedIphoneCasePrice)
-
-        val discountSamsungCasePrice = samsungCase.calcDiscountPrice()
-        pricePrinter.print(discountSamsungCasePrice)
+        pricePrinter.print(discountIphoneCasePrice)
     }
+}
+
+class Product(
+
+    /**
+     * Must be positive
+     */
+    private val price: Double,
+    private val salePercent: Int
+) {
+
+    /**
+     * @return price with applied discount determined by [salePercent]
+     *
+     * If [salePercent] is more than 100 then product will have negative price
+     * If [salePercent] is less than 0 then product price will be increased
+     */
+    fun calcDiscountPrice(): Double = price * (1 - salePercent / 100.0)
 }
 
 interface PricePrinter {
@@ -54,10 +51,18 @@ interface PricePrinter {
     fun print(price: Double)
 }
 
-class CleanKotlinPricePrinter : PricePrinter {
+class PricePrinterImplementation : PricePrinter {
 
     override fun print(price: Double) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val priceRounded = round(price * 100) / 100
+        when {
+            priceRounded % 1.0 == 0.0 -> {
+                println("${priceRounded.roundToInt()}₽")
+            }
+            else -> {
+                println("$priceRounded₽")
+            }
+        }
     }
 
 }

@@ -30,9 +30,7 @@ class ShoppingCartPresenter(
     }
 
     fun totalPricePrint() {
-        products.forEach { _ ->
-            view.print(products.sumByDouble(Product::getDiscountPrice))
-        }
+        view.print(products.sumByDouble(Product::getDiscountPrice))
     }
 
     fun productNamesAndPricesWithTotalPricePrint() {

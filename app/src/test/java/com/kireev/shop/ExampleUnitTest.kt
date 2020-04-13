@@ -9,37 +9,25 @@ import kotlin.math.roundToInt
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class ExampleUnitTest {
+class ShopTest {
 
     @Test
-    fun example() {
-
+    fun productTest() {
         val iphoneCase = Product(price = 123.5, salePercent = 30)
-        val samsungCase = Product(price = 124.5, salePercent = 15)
-
         val pricePrinter: PricePrinter = ConsolePricePrinter()
-
-        val products = listOf(iphoneCase, samsungCase)
-        val discountPrices = products.map { it.calcDiscountPrice() }
-
-        discountPrices.forEach { discountPrice ->
-            pricePrinter.print(discountPrice)
-        }
-
-        products.myForEach { product ->
-            val discountPrice = product.calcDiscountPrice()
-            pricePrinter.print(discountPrice)
-        }
-
-        discountPrices.myForEach { discountPrice ->
-            pricePrinter.print(discountPrice)
-        }
+        pricePrinter.printProductPrice(iphoneCase)
     }
 
-    private fun <TItem> List<TItem>.myForEach(action: (TItem) -> Unit) {
-        for (item in this) {
-            action(item)
-        }
+    @Test
+    fun shoppingCartTest() {
+        val iphoneCase = Product(price = 123.5, salePercent = 30)
+        val honorCase = Product(price = 56.7, salePercent = 10)
+        val samsungCase = Product(price = 98.7, salePercent = 20)
+        val meizuCase = Product(price = 34.5, salePercent = 5)
+        val productList: List<Product> = listOf(iphoneCase, honorCase, samsungCase, meizuCase)
+        val shoppingCart = ShoppingCart(productList)
+        val pricePrinter: PricePrinter = ConsolePricePrinter()
+        pricePrinter.printTotalPrice(shoppingCart)
     }
 }
 
@@ -68,21 +56,38 @@ interface PricePrinter {
      * If price have not fractional part then it will be printed as integer
      * If price have fractional part then it will be rounded for 2 symbols after "."
      */
-    fun print(price: Double)
+    fun printProductPrice(product: Product)
+
+    fun printTotalPrice(shoppingCart: ShoppingCart)
 }
 
 class ConsolePricePrinter : PricePrinter {
 
-    override fun print(price: Double) {
-        val priceRounded = round(price * 100) / 100
-        when {
-            priceRounded % 1.0 == 0.0 -> {
-                println("${priceRounded.roundToInt()}₽")
+    override fun printProductPrice(product: Product) {
+        println("Цена за единицу товара: ${format(product.calcDiscountPrice())}")
+    }
+
+    override fun printTotalPrice(shoppingCart: ShoppingCart) {
+        shoppingCart.products.forEach(::printProductPrice)
+        println("Итоговая цена за все товары: ${format(shoppingCart.calcTotalDiscountPrice())}")
+    }
+
+    private fun format(price: Double): String {
+        val discountPriceRounded = round(price * 100) / 100
+        return when {
+            discountPriceRounded % 1.0 == 0.0 -> {
+                "${discountPriceRounded.roundToInt()}₽"
             }
             else -> {
-                println("$priceRounded₽")
+                "${discountPriceRounded}₽"
             }
         }
     }
+}
 
+class ShoppingCart(val products: List<Product> = emptyList()) {
+
+    fun calcTotalDiscountPrice(): Double {
+        return products.map { product -> product.calcDiscountPrice() }.sum()
+    }
 }

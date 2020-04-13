@@ -1,6 +1,6 @@
 package com.kireev.shop
 
-interface ProductsView {
+interface ProductView {
 
     /**
      * Outputs price in <Price>P format.

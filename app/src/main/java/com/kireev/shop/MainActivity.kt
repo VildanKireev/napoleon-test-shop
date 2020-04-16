@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity(), ProductView {
     override fun print(product: Product) {
         Toast.makeText(
             this,
-            "${product.getProductName()} : ${priceFormatter.formatPrice(product.getDiscountPrice())}}₽",
+            "${product.getProductName()}: ${priceFormatter.formatPrice(product.getDiscountPrice())}}₽",
             Toast.LENGTH_LONG
         ).show()
         Log.d(

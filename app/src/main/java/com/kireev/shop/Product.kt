@@ -3,7 +3,7 @@ package com.kireev.shop
 class Product(
 
     /**
-     * Must be positive
+     * Должна быть положительной
      */
     private val price: Double,
     private val discount: Int,
@@ -11,10 +11,10 @@ class Product(
 ) {
 
     /**
-     * @return price with applied discount determined by [discount]
+     * @return <discountPrice>, определяемую по [discount]
      *
-     * If [discount] is more than 100 then product will have negative price
-     * If [discount] is less than 0 then product price will be increased
+     * Если [discount] больше 100, то товар будет иметь отрицательную цену
+     * Если [discount] меньше 0, тогда цена товара будет увеличена
      */
     fun getDiscountPrice(): Double = price * (1 - discount / 100.0)
 

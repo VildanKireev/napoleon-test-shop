@@ -1,8 +1,8 @@
 package com.kireev.shop
 
-class ShoppingCartPresenter(
-    private val view: ProductView
-) {
+import moxy.MvpPresenter
+
+class ShoppingCartPresenter : MvpPresenter<ProductView>() {
 
     private val iphoneCase = Product(price = 123.5, discount = 30, productName = "iPhone Case")
     private val honorCase = Product(price = 56.7, discount = 10, productName = "Honor Case")
@@ -11,32 +11,51 @@ class ShoppingCartPresenter(
 
     private val products: List<Product> = listOf(iphoneCase, honorCase, samsungCase, meizuCase)
 
+    private val model = CreateOrderModel()
+
+    fun checkLastName(text: String) {
+        if (!checkSymbols(text)) model.lastName = text
+        viewState.showErrorForLastName(checkSymbols(text))
+    }
+
+    fun checkFirstName(text: String) {
+        if (!checkSymbols(text)) model.firstName = text
+        viewState.showErrorForFirstName(checkSymbols(text))
+    }
+
+    fun checkPatronymic(text: String) {
+        if (!checkSymbols(text)) model.patronymic = text
+        viewState.showErrorForPatronymic(checkSymbols(text))
+    }
+
+    private fun checkSymbols(text: String): Boolean = text.length < 3
+
     fun pricesPrint() {
         products.forEach { product ->
-            view.print(product.getDiscountPrice())
+            viewState.print(product.getDiscountPrice())
         }
     }
 
     fun productNamesPrint() {
         products.forEach { product ->
-            view.print(product.getProductName())
+            viewState.print(product.getProductName())
         }
     }
 
     fun productNamesAndPricesPrint() {
         products.forEach { product ->
-            view.print(product)
+            viewState.print(product)
         }
     }
 
     fun totalPricePrint() {
-        view.print(products.sumByDouble(Product::getDiscountPrice))
+        viewState.print(products.sumByDouble(Product::getDiscountPrice))
     }
 
     fun productNamesAndPricesWithTotalPricePrint() {
         products.forEach { product ->
-            view.print(product)
+            viewState.print(product)
         }
-        view.print(products.sumByDouble(Product::getDiscountPrice))
+        viewState.print(products.sumByDouble(Product::getDiscountPrice))
     }
 }

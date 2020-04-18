@@ -118,7 +118,7 @@
 
             <EditText
                 android:id="@+id/checkoutLastName"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:ems="10"
@@ -130,34 +130,37 @@
 
             <EditText
                 android:id="@+id/checkoutFirstName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:ems="10"
                 android:hint="@string/checkout_first_name"
                 android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="@+id/checkoutLastName"
                 app:layout_constraintStart_toStartOf="@+id/checkoutLastName"
                 app:layout_constraintTop_toBottomOf="@+id/checkoutLastName" />
 
             <EditText
                 android:id="@+id/checkoutPatronymic"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:ems="10"
                 android:hint="@string/checkout_patronymic"
                 android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="@+id/checkoutFirstName"
                 app:layout_constraintStart_toStartOf="@+id/checkoutFirstName"
                 app:layout_constraintTop_toBottomOf="@+id/checkoutFirstName" />
 
             <EditText
                 android:id="@+id/checkoutPhone"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:ems="10"
                 android:hint="@string/checkout_phone"
                 android:inputType="phone"
+                app:layout_constraintEnd_toEndOf="@+id/checkoutPatronymic"
                 app:layout_constraintStart_toStartOf="@+id/checkoutPatronymic"
                 app:layout_constraintTop_toBottomOf="@+id/checkoutPatronymic" />
 
@@ -181,15 +184,26 @@
                 app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
             <TextView
+                android:id="@+id/checkoutPhoneHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/checkout_phone_hint"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/checkoutPhone"
+                app:layout_constraintStart_toStartOf="@+id/checkoutPhone"
+                app:layout_constraintTop_toBottomOf="@+id/checkoutPhone" />
+
+            <TextView
                 android:id="@+id/checkoutPaymentOption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/checkout_payment_option"
                 android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkoutPhone" />
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/checkoutPhoneHint"
+                app:layout_constraintStart_toStartOf="@+id/checkoutPhoneHint"
+                app:layout_constraintTop_toBottomOf="@+id/checkoutPhoneHint" />
 
             <RadioGroup
                 android:id="@+id/radioGroup"
@@ -197,9 +211,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:layout_constraintBottom_toTopOf="@+id/checkoutPay"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/checkoutPaymentOption"
                 app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/checkoutPaymentOption"
                 app:layout_constraintTop_toBottomOf="@+id/checkoutPaymentOption">
 
                 <RadioButton
@@ -207,14 +221,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/checkout_pay_by_cash"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/radioButton3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/checkout_pay_by_card"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
             </RadioGroup>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

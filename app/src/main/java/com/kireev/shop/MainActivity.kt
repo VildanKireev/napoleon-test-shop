@@ -11,7 +11,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), ProductView {
 
-    private val productPresenter = ProductPresenter()
     private val shoppingCartPresenter = ShoppingCartPresenter()
     private val priceFormatter = PriceFormatter()
 
@@ -55,6 +54,16 @@ class MainActivity : AppCompatActivity(), ProductView {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
+
+        checkoutPhone.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                shoppingCartPresenter.checkPhoneNumber(s.toString())
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
     }
 
     override fun print(price: Double) {
@@ -92,7 +101,11 @@ class MainActivity : AppCompatActivity(), ProductView {
         checkoutPatronymic.showError(visible)
     }
 
-    fun EditText.showError(visible: Boolean) {
+    override fun showErrorForPhoneNumber(visible: Boolean) {
+        checkoutPhone.showError(visible)
+    }
+
+    private fun EditText.showError(visible: Boolean) {
         val drawable = if (visible) R.drawable.ic_error
         else 0
 

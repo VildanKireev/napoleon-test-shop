@@ -11,7 +11,29 @@ class ProductPresenter : MvpPresenter<ProductView>() {
 
     private val model = CreateOrderModel()
 
+    fun checkLastName(text: String) {
+        if (!checkSymbols(text)) model.lastName = text
+        viewState.showErrorForLastName(checkSymbols(text))
+    }
+
+    fun checkFirstName(text: String) {
+        if (!checkSymbols(text)) model.firstName = text
+        viewState.showErrorForFirstName(checkSymbols(text))
+    }
+
+    fun checkPatronymic(text: String) {
+        if (!checkSymbols(text)) model.patronymic = text
+        viewState.showErrorForPatronymic(checkSymbols(text))
+    }
+
+    fun checkPhoneNumber(text: String) {
+        if (checkNumber(text)) model.phoneNumber = text
+        viewState.showErrorForPhoneNumber(!checkNumber(text))
+    }
+
     private fun checkSymbols(text: String): Boolean = text.length < 3
+
+    private fun checkNumber(text: String): Boolean = Regex("(\\+7|8)\\d{10}").matches(text)
 
     fun pricePrint() {
         viewState.print(iphoneCase.getDiscountPrice())

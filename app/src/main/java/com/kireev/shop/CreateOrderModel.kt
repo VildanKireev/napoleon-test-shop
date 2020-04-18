@@ -8,5 +8,7 @@ data class CreateOrderModel(
 
     var firstName: String = "",
 
-    var patronymic: String = ""
+    var patronymic: String = "",
+
+    var phoneNumber: String = ""
 )

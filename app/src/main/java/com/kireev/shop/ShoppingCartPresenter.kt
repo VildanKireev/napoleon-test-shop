@@ -28,7 +28,14 @@ class ShoppingCartPresenter : MvpPresenter<ProductView>() {
         viewState.showErrorForPatronymic(checkSymbols(text))
     }
 
+    fun checkPhoneNumber(text: String) {
+        if (checkNumber(text)) model.phoneNumber = text
+        viewState.showErrorForPhoneNumber(!checkNumber(text))
+    }
+
     private fun checkSymbols(text: String): Boolean = text.length < 3
+
+    private fun checkNumber(text: String): Boolean = Regex("(\\+7|8)\\d{10}").matches(text)
 
     fun pricesPrint() {
         products.forEach { product ->

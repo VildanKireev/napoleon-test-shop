@@ -29,4 +29,7 @@ interface ProductView : MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showErrorForPatronymic(visible: Boolean)
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun showErrorForPhoneNumber(visible: Boolean)
 }

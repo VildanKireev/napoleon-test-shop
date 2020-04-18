@@ -13,4 +13,5 @@
     <string name="checkout_pay_by_cash">Оплата наличными</string>
     <string name="checkout_pay_by_card">Оплата картой при получении</string>
     <string name="checkout_phone">Телефон</string>
+    <string name="checkout_phone_hint">Пример, 89999999999 или +79999999999</string>
 </resources>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">napoleon-test-shop</string>
+    <string name="app_name">Магазин</string>
     <string name="checkout_header">Оформление заказа</string>
     <string name="checkout_shopping_cart">Корзина:</string>
     <string name="checkout_price">Цена без скидки:</string>

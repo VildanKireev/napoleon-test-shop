@@ -1,4 +1,4 @@
-package com.kireev.shop
+package com.kireev.shop.model
 
 /**
  * Модель для создания заказа

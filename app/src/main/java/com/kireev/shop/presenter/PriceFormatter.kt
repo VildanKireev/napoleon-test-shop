@@ -1,4 +1,4 @@
-package com.kireev.shop
+package com.kireev.shop.presenter
 
 import kotlin.math.round
 import kotlin.math.roundToInt

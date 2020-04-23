@@ -6,12 +6,12 @@ import android.text.TextWatcher
 import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
-import com.kireev.shop.PriceFormatter
-import com.kireev.shop.Product
-import com.kireev.shop.ProductView
 import com.kireev.shop.R
+import com.kireev.shop.model.Product
+import com.kireev.shop.presenter.PriceFormatter
+import com.kireev.shop.presenter.ProductView
 import com.kireev.shop.presenter.ShoppingCartPresenter
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.checkout_layout.*
 
 class CheckoutActivity : BaseActivity(), ProductView {
 
@@ -20,7 +20,7 @@ class CheckoutActivity : BaseActivity(), ProductView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.checkout_layout)
 
         shoppingCartPresenter.attachView(this)
 

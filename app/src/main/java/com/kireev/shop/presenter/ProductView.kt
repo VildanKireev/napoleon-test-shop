@@ -1,5 +1,6 @@
-package com.kireev.shop
+package com.kireev.shop.presenter
 
+import com.kireev.shop.model.Product
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType

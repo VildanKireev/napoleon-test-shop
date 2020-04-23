@@ -1,8 +1,7 @@
 package com.kireev.shop.presenter
 
-import com.kireev.shop.Product
-import com.kireev.shop.ProductView
 import com.kireev.shop.model.CreateOrderModel
+import com.kireev.shop.model.Product
 import moxy.MvpPresenter
 
 class ProductPresenter : MvpPresenter<ProductView>() {

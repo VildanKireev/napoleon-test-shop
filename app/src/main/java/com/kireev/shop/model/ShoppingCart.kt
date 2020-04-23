@@ -1,4 +1,4 @@
-package com.kireev.shop
+package com.kireev.shop.model
 
 class ShoppingCart(
     private val products: List<Product> = emptyList()
